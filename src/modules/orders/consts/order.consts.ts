@@ -1,0 +1,3 @@
+export const ORDER_NAME_LENGTH = 60;
+export const MIN_PRICE = 0;
+export const ORDERS_REPOSITORY_TOKEN = 'ORDERS_REPOSITORY_TOKEN';

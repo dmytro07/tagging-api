@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SharedModule } from './modules/shared/shared.module';
 import { UsersModule } from './modules/users/users.module';
+import { OrdersModule } from './modules/orders/orders.module';
 
 @Module({
   imports: [
@@ -17,8 +18,8 @@ import { UsersModule } from './modules/users/users.module';
     }),
     SharedModule,
     UsersModule,
+    OrdersModule,
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}

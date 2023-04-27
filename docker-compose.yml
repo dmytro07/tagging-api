@@ -13,7 +13,9 @@ services:
       - ${PORT}:${PORT}
       - 9229:9229
     networks:
-      - network
+      network:
+        aliases:
+          - postgres
     depends_on:
       - postgres
   postgres:
@@ -27,6 +29,10 @@ services:
       - '5432:5432'
     volumes:
       - docker-nest-postgres:/var/lib/postgresql/data
+    networks:
+      network:
+        aliases:
+          - postgres
 
 volumes:
   docker-nest-postgres:

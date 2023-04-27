@@ -14,6 +14,6 @@ export interface BaseRepository<T extends BaseEntity> {
   findOne(filterCondition: FindOneOptions<T>): Promise<T>;
   findAll(options?: FindManyOptions<T>): Promise<T[]>;
   update(id: string, data: QueryDeepPartialEntity<T>): Promise<T>;
-  delete(data: FindOptionsWhere<T>): Promise<number>;
-  softDelete(data: FindOptionsWhere<T>): Promise<number>;
+  delete(id: string): Promise<number>;
+  softDelete(id: string): Promise<number>;
 }

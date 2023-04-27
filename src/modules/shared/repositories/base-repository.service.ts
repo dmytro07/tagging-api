@@ -39,11 +39,11 @@ export abstract class BaseRepositoryService<T extends BaseEntity>
     return result.generatedMaps[0] as T;
   }
 
-  async delete(options: FindOptionsWhere<T>): Promise<number> {
-    return (await this.entity.delete(options)).affected;
+  async delete(id: string): Promise<number> {
+    return (await this.entity.delete(id)).affected;
   }
 
-  async softDelete(options: FindOptionsWhere<T>): Promise<number> {
-    return (await this.entity.softDelete(options)).affected;
+  async softDelete(id: string): Promise<number> {
+    return (await this.entity.softDelete(id)).affected;
   }
 }

@@ -6,6 +6,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -17,6 +18,7 @@ import { UsersEntity } from 'src/modules/users/entities/users.entity';
 import { CanAssignTagToOrderGuard } from '../../guards/can-assign-tag-to-order.guard';
 import { CanManageOrderGuard } from '../../guards/can-manage-order.guard';
 import { ThrowNotFound } from 'src/modules/shared/decorators/throw-not-found.decorator';
+import { SearchOrderQueryDto } from '../../dtos/search-order-query.dto';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
@@ -27,6 +29,14 @@ export class OrdersController {
   @Get()
   getAll(): Promise<OrdersEntity[]> {
     return this.ordersService.getAll({ relations: ['tags'] });
+  }
+
+  @Get('search')
+  search(
+    @Query() query: SearchOrderQueryDto,
+    @User() user: UsersEntity,
+  ): Promise<OrdersEntity[]> {
+    return this.ordersService.search(query, user.id);
   }
 
   @Get(':id')

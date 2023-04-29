@@ -6,6 +6,7 @@ import { USERS_REPOSITORY_TOKEN } from './consts/user.consts';
 import { UsersService } from './services/users.service';
 import { UsersController } from './controllers/users/users.controller';
 import { UserExistsConstraintService } from './validators/user-exists.validator';
+import { TagsModule } from '../tags/tags.module';
 
 @Module({
   providers: [
@@ -13,7 +14,7 @@ import { UserExistsConstraintService } from './validators/user-exists.validator'
     UsersService,
     UserExistsConstraintService,
   ],
-  imports: [TypeOrmModule.forFeature([UsersEntity])],
+  imports: [TypeOrmModule.forFeature([UsersEntity]), TagsModule],
   controllers: [UsersController],
   exports: [UsersService],
 })

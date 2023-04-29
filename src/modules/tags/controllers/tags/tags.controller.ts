@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -14,7 +15,7 @@ import { CreateTagDto } from '../../dtos/create-tag.dto';
 import { User } from 'src/modules/shared/decorators/user.decorator';
 import { UsersEntity } from 'src/modules/users/entities/users.entity';
 import { UpdateTagDto } from '../../dtos/update-tag.dto';
-import { CanUpdateTagGuard } from '../../guards/can-update-tag.guard';
+import { CanManageTagGuard } from '../../guards/can-manage-tag.guard';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiTags('Tags')
@@ -42,11 +43,17 @@ export class TagsController {
   }
 
   @Put(':id')
-  @UseGuards(CanUpdateTagGuard)
+  @UseGuards(CanManageTagGuard)
   update(
     @Body() body: UpdateTagDto,
     @Param('id', ParseUUIDPipe) id: string,
   ): Promise<TagsEntity> {
     return this.tagsService.update(body, id);
+  }
+
+  @Delete(':id')
+  @UseGuards(CanManageTagGuard)
+  delete(@Param('id', ParseUUIDPipe) id: string): Promise<number> {
+    return this.tagsService.delete(id);
   }
 }

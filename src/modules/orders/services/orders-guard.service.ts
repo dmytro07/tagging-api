@@ -8,6 +8,6 @@ export class OrdersGuardService {
   async canManage(orderId: string, userId: string): Promise<boolean> {
     const order = await this.ordersService.get(orderId);
 
-    return order.userId === userId;
+    return order?.userId === userId;
   }
 }

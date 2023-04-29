@@ -3,7 +3,7 @@ import { UsersEntity } from 'src/modules/users/entities/users.entity';
 import { TagsGuardService } from '../services/tags-guard.service';
 
 @Injectable()
-export class CanUpdateTagGuard implements CanActivate {
+export class CanManageTagGuard implements CanActivate {
   constructor(private readonly tagsGuardService: TagsGuardService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

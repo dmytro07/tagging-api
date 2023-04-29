@@ -8,6 +8,6 @@ export class TagsGuardService {
   async canManage(tagId: string, userId: string): Promise<boolean> {
     const tag = await this.tagsService.get(tagId);
 
-    return tag.authorId === userId;
+    return tag?.authorId === userId;
   }
 }

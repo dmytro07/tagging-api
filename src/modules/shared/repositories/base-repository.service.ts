@@ -46,4 +46,36 @@ export abstract class BaseRepositoryService<T extends BaseEntity>
   async softDelete(id: string): Promise<number> {
     return (await this.entity.softDelete(id)).affected;
   }
+
+  async addRelation(
+    propertyPath: Extract<keyof T, string>,
+    baseEntityId: string,
+    relatedEntityId: string,
+  ) {
+    const existingRelation = await this.entity.findOne({
+      where: {
+        id: baseEntityId,
+        [propertyPath]: { id: relatedEntityId },
+      } as FindOptionsWhere<T>,
+      relations: [propertyPath],
+    });
+    !existingRelation &&
+      (await this.entity
+        .createQueryBuilder()
+        .relation(propertyPath)
+        .of(baseEntityId)
+        .add(relatedEntityId));
+  }
+
+  async removeRelation(
+    propertyPath: Extract<keyof T, string>,
+    baseEntityId: string,
+    relatedEntityId: string,
+  ) {
+    this.entity
+      .createQueryBuilder()
+      .relation(propertyPath)
+      .of(baseEntityId)
+      .remove(relatedEntityId);
+  }
 }

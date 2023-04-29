@@ -16,4 +16,14 @@ export interface BaseRepository<T extends BaseEntity> {
   update(id: string, data: QueryDeepPartialEntity<T>): Promise<T>;
   delete(id: string): Promise<number>;
   softDelete(id: string): Promise<number>;
+  addRelation(
+    propertyPath: Extract<keyof T, string>,
+    baseEntityId: string,
+    relatedEntityId: string,
+  );
+  removeRelation(
+    propertyPath: Extract<keyof T, string>,
+    baseEntityId: string,
+    relatedEntityId: string,
+  );
 }

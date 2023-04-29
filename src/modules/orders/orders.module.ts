@@ -6,7 +6,7 @@ import { OrdersController } from './controllers/orders/orders.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrdersEntity } from './entities/orders.entity';
 import { TagsModule } from '../tags/tags.module';
-import { OrdersGuardService } from './services/orders-guard/orders-guard.service';
+import { OrdersGuardService } from './services/orders-guard.service';
 
 @Module({
   providers: [

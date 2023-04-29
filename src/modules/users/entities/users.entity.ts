@@ -18,7 +18,7 @@ export class UsersEntity extends BaseEntity {
   @Column({ unique: true, length: EMAIL_LENGTH })
   email: string;
 
-  @ManyToMany(() => TagsEntity)
+  @ManyToMany(() => TagsEntity, { eager: true })
   @JoinTable()
   tags: TagsEntity[];
 }

@@ -40,12 +40,21 @@ export class UsersController {
   }
 
   @ApiBearerAuth()
-  @Patch(':tagId')
+  @Patch(':tagId/assign')
   @UseGuards(CanAssignTagToUserGuard)
   assignTag(
     @Param('tagId', ParseUUIDPipe) tagId: string,
     @User() user: UsersEntity,
   ) {
     return this.usersService.assignTag(user.id, tagId);
+  }
+
+  @ApiBearerAuth()
+  @Patch(':tagId/unassign')
+  unassignTag(
+    @Param('tagId', ParseUUIDPipe) tagId: string,
+    @User() user: UsersEntity,
+  ) {
+    return this.usersService.unassignTag(user.id, tagId);
   }
 }

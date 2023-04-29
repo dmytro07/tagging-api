@@ -15,6 +15,6 @@ import { TagsGuardService } from './services/tags-guard.service';
     TagsGuardService,
   ],
   controllers: [TagsController],
-  exports: [TagsService, TagsGuardService],
+  exports: [TagsGuardService],
 })
 export class TagsModule {}

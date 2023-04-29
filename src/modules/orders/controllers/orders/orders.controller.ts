@@ -15,6 +15,7 @@ import { OrdersService } from 'src/modules/orders/services/orders.service';
 import { User } from 'src/modules/shared/decorators/user.decorator';
 import { UsersEntity } from 'src/modules/users/entities/users.entity';
 import { CanAssignTagToOrderGuard } from '../../guards/can-assign-tag-to-order.guard';
+import { CanManageOrderGuard } from '../../guards/can-manage-order.guard';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
@@ -24,7 +25,7 @@ export class OrdersController {
 
   @Get()
   getAll(): Promise<OrdersEntity[]> {
-    return this.ordersService.getAll();
+    return this.ordersService.getAll({ relations: ['tags'] });
   }
 
   @Get(':id')
@@ -40,12 +41,21 @@ export class OrdersController {
     return this.ordersService.create({ ...body, userId: user.id });
   }
 
-  @Patch(':tagId/:orderId')
+  @Patch(':tagId/:orderId/assign')
   @UseGuards(CanAssignTagToOrderGuard)
   assignTag(
     @Param('tagId', ParseUUIDPipe) tagId: string,
     @Param('orderId', ParseUUIDPipe) orderId: string,
   ) {
     return this.ordersService.assignTag(orderId, tagId);
+  }
+
+  @Patch(':tagId/:orderId/unassign')
+  @UseGuards(CanManageOrderGuard)
+  unassignTag(
+    @Param('tagId', ParseUUIDPipe) tagId: string,
+    @Param('orderId', ParseUUIDPipe) orderId: string,
+  ) {
+    return this.ordersService.unassignTag(orderId, tagId);
   }
 }

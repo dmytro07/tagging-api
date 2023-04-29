@@ -26,7 +26,7 @@ export class OrdersEntity extends BaseEntity {
   @JoinColumn({ name: 'userId' })
   user: UsersEntity;
 
-  @ManyToMany(() => TagsEntity)
+  @ManyToMany(() => TagsEntity, { eager: true })
   @JoinTable()
   tags: TagsEntity[];
 }

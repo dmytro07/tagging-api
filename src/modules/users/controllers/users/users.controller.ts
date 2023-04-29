@@ -9,9 +9,11 @@ import {
 import { UsersService } from '../../services/users.service';
 import { UsersEntity } from '../../entities/users.entity';
 import { CreateUserDto } from '../../dtos/create-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { IsPublic } from 'src/modules/shared/decorators/is-public.decorator';
 
 @ApiTags('Users')
+@ApiBearerAuth()
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -26,6 +28,7 @@ export class UsersController {
     return this.usersService.get(id);
   }
 
+  @IsPublic()
   @Post()
   create(@Body() body: CreateUserDto): Promise<UsersEntity> {
     return this.usersService.create(body);

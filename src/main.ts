@@ -22,7 +22,11 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   const document = SwaggerModule.createDocument(
     app,
-    new DocumentBuilder().setTitle('Tagging API').setVersion('1.0').build(),
+    new DocumentBuilder()
+      .setTitle('Tagging API')
+      .setVersion('1.0')
+      .addBearerAuth()
+      .build(),
   );
   SwaggerModule.setup('swagger', app, document);
   await app.listen(port, () => {

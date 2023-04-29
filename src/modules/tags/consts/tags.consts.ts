@@ -1,0 +1,3 @@
+export const TAG_NAME_LENGTH = 60;
+export const COLOR_LENGTH = 20;
+export const TAGS_REPOSITORY_TOKEN = 'TAGS_REPOSITORY_TOKEN';

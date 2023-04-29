@@ -1,10 +1,11 @@
 import { BaseEntity } from '../../shared/entities/base.entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import {
   EMAIL_LENGTH,
   FIRST_NAME_LENGTH,
   LAST_NAME_LENGTH,
 } from '../consts/user.consts';
+import { TagsEntity } from 'src/modules/tags/entities/tags.entity';
 
 @Entity({ name: 'Users' })
 export class UsersEntity extends BaseEntity {
@@ -16,4 +17,8 @@ export class UsersEntity extends BaseEntity {
 
   @Column({ unique: true, length: EMAIL_LENGTH })
   email: string;
+
+  @ManyToMany(() => TagsEntity)
+  @JoinTable()
+  tags: TagsEntity[];
 }

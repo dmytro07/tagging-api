@@ -35,8 +35,8 @@ export abstract class BaseRepositoryService<T extends BaseEntity>
   }
 
   async update(id: string, data: QueryDeepPartialEntity<T>): Promise<T> {
-    const result = await this.entity.update(id, data);
-    return result.generatedMaps[0] as T;
+    await this.entity.update(id, data);
+    return this.findById(id);
   }
 
   async delete(id: string): Promise<number> {

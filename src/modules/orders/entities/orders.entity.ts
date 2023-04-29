@@ -1,7 +1,15 @@
 import { BaseEntity } from '../../shared/entities/base.entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm';
 import { ORDER_NAME_LENGTH } from '../consts/order.consts';
 import { UsersEntity } from 'src/modules/users/entities/users.entity';
+import { TagsEntity } from 'src/modules/tags/entities/tags.entity';
 
 @Entity({ name: 'Orders' })
 export class OrdersEntity extends BaseEntity {
@@ -11,7 +19,14 @@ export class OrdersEntity extends BaseEntity {
   @Column({ type: 'int' })
   price: number;
 
+  @Column({ type: 'uuid' })
+  userId: string;
+
   @ManyToOne(() => UsersEntity)
   @JoinColumn({ name: 'userId' })
   user: UsersEntity;
+
+  @ManyToMany(() => TagsEntity)
+  @JoinTable()
+  tags: TagsEntity[];
 }

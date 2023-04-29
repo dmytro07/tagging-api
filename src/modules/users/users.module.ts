@@ -15,5 +15,6 @@ import { UserExistsConstraintService } from './validators/user-exists.validator'
   ],
   imports: [TypeOrmModule.forFeature([UsersEntity])],
   controllers: [UsersController],
+  exports: [UsersService],
 })
 export class UsersModule {}

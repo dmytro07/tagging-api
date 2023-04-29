@@ -1,12 +1,13 @@
-import { IsNumber, IsString, IsUUID, MaxLength, Min } from 'class-validator';
+import { IsNumber, IsString, MaxLength, Min } from 'class-validator';
 import { MIN_PRICE, ORDER_NAME_LENGTH } from '../consts/order.consts';
-import { UserExists } from 'src/modules/users/validators/user-exists.validator';
+import { Trim } from 'src/modules/shared/decorators/trim.decorator';
+import { ApiHideProperty } from '@nestjs/swagger';
 
 export class CreateOrderDto {
-  @IsUUID()
-  @UserExists()
+  @ApiHideProperty()
   userId: string;
 
+  @Trim()
   @IsString()
   @MaxLength(ORDER_NAME_LENGTH)
   name: string;

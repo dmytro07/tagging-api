@@ -1,73 +1,37 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Getting Started with the App
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This guide provides step-by-step instructions for starting the app using two different methods: Docker-compose and npm start. Additionally, it includes information on accessing the Swagger documentation and authorization.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+1. [Starting the App with Docker-compose](#starting-the-app-with-docker-compose)
+2. [Starting the App with npm start](#starting-the-app-with-npm-start)
+3. [Accessing Swagger Documentation](#accessing-swagger-documentation)
+4. [Authorization](#authorization)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Starting the App with Docker-compose
 
-## Installation
+Follow these steps to start the app using Docker-compose:
 
-```bash
-$ npm install
-```
+1. Create a `.env` file in the project root.
+2. Copy the contents of `.env.example` into the `.env` file.
+3. Run the following command: `npm run docker:up`
 
-## Running the app
+## Starting the App with npm start
 
-```bash
-# development
-$ npm run start
+Follow these steps to start the app using npm start:
 
-# watch mode
-$ npm run start:dev
+1. Create a `.env` file in the project root.
+2. Populate the `.env` file with environment variables. You can find the list of required variables in the `.env.example` file.
+3. If you specify a value for `NODE_ENV` other than "dev", create and run migrations:
+   1. Run the following command: `npm run typeorm:generate-migration` (or `npm run typeorm:generate-migration:windows` on a Windows machine)
+   2. Run the following command: `npm run typeorm:run-migrations`
+4. Start the app by running the following command: `npm run start`
 
-# production mode
-$ npm run start:prod
-```
+## Accessing Swagger Documentation
 
-## Test
+Once the app is running, you can access the Swagger documentation at `{{host:port}}/swagger`.
 
-```bash
-# unit tests
-$ npm run test
+## Authorization
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+To authorize your requests, provide a your user's id as a Bearer token in the header of your API calls.

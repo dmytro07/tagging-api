@@ -16,6 +16,7 @@ import { User } from 'src/modules/shared/decorators/user.decorator';
 import { UsersEntity } from 'src/modules/users/entities/users.entity';
 import { CanAssignTagToOrderGuard } from '../../guards/can-assign-tag-to-order.guard';
 import { CanManageOrderGuard } from '../../guards/can-manage-order.guard';
+import { ThrowNotFound } from 'src/modules/shared/decorators/throw-not-found.decorator';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
@@ -29,6 +30,7 @@ export class OrdersController {
   }
 
   @Get(':id')
+  @ThrowNotFound()
   get(@Param('id', ParseUUIDPipe) id: string): Promise<OrdersEntity> {
     return this.ordersService.get(id);
   }

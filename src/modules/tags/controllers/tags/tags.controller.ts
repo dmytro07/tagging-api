@@ -17,6 +17,7 @@ import { UsersEntity } from 'src/modules/users/entities/users.entity';
 import { UpdateTagDto } from '../../dtos/update-tag.dto';
 import { CanManageTagGuard } from '../../guards/can-manage-tag.guard';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { ThrowNotFound } from 'src/modules/shared/decorators/throw-not-found.decorator';
 
 @ApiTags('Tags')
 @ApiBearerAuth()
@@ -30,6 +31,7 @@ export class TagsController {
   }
 
   @Get(':id')
+  @ThrowNotFound()
   get(@Param('id', ParseUUIDPipe) id: string): Promise<TagsEntity> {
     return this.tagsService.get(id);
   }
@@ -44,6 +46,7 @@ export class TagsController {
 
   @Put(':id')
   @UseGuards(CanManageTagGuard)
+  @ThrowNotFound()
   update(
     @Body() body: UpdateTagDto,
     @Param('id', ParseUUIDPipe) id: string,

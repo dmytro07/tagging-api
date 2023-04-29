@@ -5,6 +5,7 @@ import {
   LAST_NAME_LENGTH,
 } from '../consts/user.consts';
 import { Trim } from 'src/modules/shared/decorators/trim.decorator';
+import { UserAlreadyExists } from '../validators/user-already-exists.validator';
 
 export class CreateUserDto {
   @Trim()
@@ -21,5 +22,6 @@ export class CreateUserDto {
   @IsString()
   @MaxLength(EMAIL_LENGTH)
   @IsEmail()
+  @UserAlreadyExists()
   email: string;
 }

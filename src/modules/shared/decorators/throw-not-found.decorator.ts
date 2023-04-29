@@ -8,16 +8,16 @@ export function ThrowNotFound(message?: string): MethodDecorator {
   ) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = async function (...args: any[]) {
-      const result = await originalMethod.apply(this, args);
+    descriptor.value = new Proxy(originalMethod, {
+      apply: async (targetMethod, thisArg, args) => {
+        const result = await Reflect.apply(targetMethod, thisArg, args);
 
-      if (result === null || result === undefined) {
-        throw new NotFoundException(message);
-      }
+        if (result === null || result === undefined) {
+          throw new NotFoundException(message);
+        }
 
-      return result;
-    };
-
-    return descriptor;
+        return result;
+      },
+    });
   };
 }

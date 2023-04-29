@@ -8,14 +8,14 @@ services:
       - .:/usr/src/app
     env_file:
       - .env
-    command: npm run start:debug
+    command: npm start
     ports:
       - ${PORT}:${PORT}
       - 9229:9229
     networks:
       network:
         aliases:
-          - postgres
+          - postgres-net
     depends_on:
       - postgres
   postgres:
@@ -32,7 +32,7 @@ services:
     networks:
       network:
         aliases:
-          - postgres
+          - postgres-net
 
 volumes:
   docker-nest-postgres:

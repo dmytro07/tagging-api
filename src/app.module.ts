@@ -5,7 +5,7 @@ import { UsersModule } from './modules/users/users.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { ConfigModule } from '@nestjs/config';
 import { TagsModule } from './modules/tags/tags.module';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthGuard } from './modules/shared/guards/auth.guard';
 
 @Module({

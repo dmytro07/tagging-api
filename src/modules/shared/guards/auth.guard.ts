@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   private readonly AUTH_HEADER = 'authorization';
 
   constructor(
-    private reflector: Reflector,
+    private readonly reflector: Reflector,
     private readonly usersService: UsersService,
   ) {}
 

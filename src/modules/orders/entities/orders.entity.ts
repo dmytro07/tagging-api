@@ -8,8 +8,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { ORDER_NAME_LENGTH } from '../consts/order.consts';
-import { UsersEntity } from 'src/modules/users/entities/users.entity';
-import { TagsEntity } from 'src/modules/tags/entities/tags.entity';
+import { UsersEntity } from '../../users/entities/users.entity';
+import { TagsEntity } from '../../tags/entities/tags.entity';
 
 @Entity({ name: 'Orders' })
 export class OrdersEntity extends BaseEntity {

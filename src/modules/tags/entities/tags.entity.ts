@@ -1,7 +1,7 @@
 import { BaseEntity } from '../../shared/entities/base.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { COLOR_LENGTH, TAG_NAME_LENGTH } from '../consts/tags.consts';
-import { UsersEntity } from 'src/modules/users/entities/users.entity';
+import { UsersEntity } from '../../users/entities/users.entity';
 
 @Entity({ name: 'Tags' })
 export class TagsEntity extends BaseEntity {

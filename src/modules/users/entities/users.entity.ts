@@ -5,7 +5,7 @@ import {
   FIRST_NAME_LENGTH,
   LAST_NAME_LENGTH,
 } from '../consts/user.consts';
-import { TagsEntity } from 'src/modules/tags/entities/tags.entity';
+import { TagsEntity } from '../../tags/entities/tags.entity';
 
 @Entity({ name: 'Users' })
 export class UsersEntity extends BaseEntity {
